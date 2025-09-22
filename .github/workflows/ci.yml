@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ develop, main ]
 
 jobs:
-  build-and-test:
+  build-test-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,8 +22,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Run lint
+        run: npm run lint || echo "No lint script defined"
+
       - name: Run tests
-        run: npm test || echo "No tests defined"
+        run: npm test -- --coverage || echo "No tests defined"
 
       - name: Build project
         run: npm run build || echo "No build script defined"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: build/
+
+      # 🚀 Deploy step
+      - name: Deploy to Render
+        if: github.ref == 'refs/heads/main'
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
