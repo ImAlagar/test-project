@@ -1,0 +1,17 @@
+{
+  "name": "deva",
+  "version": "1.0.0",
+  "description": "echo \"# Test Project - Dev Setup\" > README.md",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"Build successful!\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-devA:ImAlagar/test-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
