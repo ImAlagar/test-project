@@ -1,1 +1,1 @@
-# test-project
+echo "# Test Project - Dev Setup" > README.md
